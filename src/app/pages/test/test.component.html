@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row align-items-center justify-content-center h-100">
+    <div class="col-md-6">
+      @if(isTestStarted){
+      <mat-card
+        [class.mat-elevation-z2]="true"
+        class="animate__animated animate__pulse"
+      >
+        <mat-card-content>
+          <p class="text-center fs-4">
+            ¿Con qué frecuencia tienes cada síntoma? Selecciona las opciones que
+            más se ajusten a ti.
+          </p>
+          <p class="text-center fs-5">{{ preguntas[indexPregunta] }}</p>
+          <mat-radio-group
+            aria-label="Select an option"
+            class="d-flex justify-content-center"
+            [(ngModel)]="opcion"
+          >
+            <div class="row d-flex justify-content-center">
+              @for (op of opciones; track $index) {
+              <div class="col-12 text-center">
+                <mat-radio-button [value]="op" (clic)="nextQuestion()">{{
+                  opcionesText[op]
+                }}</mat-radio-button>
+              </div>
+              }
+            </div>
+          </mat-radio-group>
+          <mat-card-footer class="d-flex justify-content-center p-4">
+            <button mat-flat-button (click)="nextQuestion()" class="me-2">
+              Siguiente
+            </button>
+            @if(indexPregunta == preguntas.length - 1){
+            <button
+              mat-flat-button
+              class="ms-2"
+              style="background-color: lawngreen"
+              (click)="saveAnswers()"
+            >
+              Enviar Respuestas
+            </button>
+            }
+          </mat-card-footer>
+        </mat-card-content>
+      </mat-card>
+      } @else {
+      <mat-card
+        [class.mat-elevation-z2]="true"
+        class="animate__animated animate__pulse"
+      >
+        <mat-card-content>
+          <p class="text-center fs-1">Vamos con el test.</p>
+          <p class="text-center fs-5">
+            Al acabar verás los resultados en función de tus respuestas y los
+            puntos obtenidos.
+          </p>
+          <p class="text-center fs-5">
+            Cuando acabes, se mostrará su interpretación automáticamente.
+            Recuerda que es algo orientativo, y que no sustituye a una
+            evaluación de un profesional.
+          </p>
+        </mat-card-content>
+        <mat-card-footer class="text-center p-4">
+          <button mat-flat-button (click)="isTestStarted = true" class="fs-5">
+            Iniciar
+          </button>
+        </mat-card-footer>
+      </mat-card>
+      }
+    </div>
+  </div>
+</div>

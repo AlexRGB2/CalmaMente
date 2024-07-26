@@ -1,0 +1,9 @@
+<mat-toolbar color="primary"> Menu </mat-toolbar>
+<mat-nav-list>
+  @for (menu of menus; track $index) {
+  <a [routerLink]="menu.route" mat-list-item>
+    <mat-icon class="me-2 align-middle">{{ menu.icon }}</mat-icon>
+    <span>{{ menu.name }}</span>
+  </a>
+  }
+</mat-nav-list>

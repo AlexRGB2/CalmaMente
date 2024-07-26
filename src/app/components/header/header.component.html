@@ -1,0 +1,15 @@
+<mat-toolbar [class.mat-elevation-z2]="true">
+  <button mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img src="/assets/imgs/logo.jpeg" alt="Logo" class="logo" />
+  <span><a routerLink="home" class="fs-4">CalmaMente</a></span>
+  <span class="spacer"></span>
+  <mat-slide-toggle
+    class="me-4"
+    (ngModelChange)="onChange($event)"
+    [(ngModel)]="isDarkThemeActive"
+  >
+    <mat-icon class="align-middle">{{ iconTheme }}</mat-icon>
+  </mat-slide-toggle>
+</mat-toolbar>
