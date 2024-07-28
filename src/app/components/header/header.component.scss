@@ -1,13 +1,25 @@
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .logo {
-    border-radius: 50%;
-    height: 80%;
-    margin-right: 10px;
+  border-radius: 50%;
+  height: 80%;
+  margin-right: 10px;
+}
+
+.theme-text {
+  color: var(--primary-text-color);
+
+  &.dark-theme {
+    --primary-text-color: #fff;
+  }
+
+  &.light-theme {
+    --primary-text-color: #000;
+  }
 }

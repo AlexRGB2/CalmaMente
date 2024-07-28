@@ -13,8 +13,9 @@ export class TestComponent {
   currentQuestionIndex: number = 0;
   selectedOption: string | null = null;
   answers: { [key: string]: string } = {};
-  isTestStarted: boolean = true;
+  paso: number = 1;
   opciones: string[] = [''];
+  nivelAnsiedad = '';
 
   constructor(private formularioService: FormularioService) {}
 
@@ -25,47 +26,24 @@ export class TestComponent {
   loadQuestions(): void {
     this.questions = [
       {
-        text: 'Cambios de humor, irritabilidad',
+        text: 'Sensacion de agobio de angustia',
         options: ['0', '1', '2', '3'],
       },
-      { text: 'Cambios en el apetito', options: ['0', '1', '2', '3'] },
-      { text: 'Cambios en la conducta sexual', options: ['0', '1', '2', '3'] },
+      {
+        text: 'Sensacion de inquietud nervios intranquilidad',
+        options: ['0', '1', '2', '3'],
+      },
       {
         text: 'Corazon acelerado o palpitaciones',
         options: ['0', '1', '2', '3'],
       },
+      { text: 'Sensacion de fatiga', options: ['0', '1', '2', '3'] },
       {
-        text: 'Dolor de tripa, nauseas o vomitos',
+        text: 'Problemas para descansar y para dormir',
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Evitar determinadas situaciones',
-        options: ['0', '1', '2', '3'],
-      },
-      {
-        text: 'Faltas de memoria, te cuesta recordar cosas',
-        options: ['0', '1', '2', '3'],
-      },
-      {
-        text: 'Fumar o beber mas de lo habitual',
-        options: ['0', '1', '2', '3'],
-      },
-      {
-        text: 'Incapacidad de pensar claramente o bloqueo mental',
-        options: ['0', '1', '2', '3'],
-      },
-      {
-        text: 'Inseguridad a la hora de tomar decisiones (incluso simples)',
-        options: ['0', '1', '2', '3'],
-      },
-      { text: 'Llorar mas de lo habitual', options: ['0', '1', '2', '3'] },
-      { text: 'Nivel de Ansiedad', options: ['0', '1', '2', '3'] },
-      {
-        text: 'Pensamientos anticipatorios, negativos o catastroficos',
-        options: ['0', '1', '2', '3'],
-      },
-      {
-        text: 'Pensamientos rumiativos (le das muchas vueltas a las cosas)',
+        text: 'Tension muscular o dolores en algunas partes del cuerpo',
         options: ['0', '1', '2', '3'],
       },
       {
@@ -73,24 +51,46 @@ export class TestComponent {
         options: ['0', '1', '2', '3'],
       },
       {
+        text: 'Dolor de tripa nauseas o vomitos',
+        options: ['0', '1', '2', '3'],
+      },
+      {
         text: 'Problemas de concentracion (incluso en tareas sencillas)',
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Problemas para descansar y para dormir',
+        text: 'Incapacidad de pensar claramente o bloqueo mental',
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Sensacion de agobio, de angustia',
-        options: ['0', '1', '2', '3'],
-      },
-      { text: 'Sensacion de fatiga', options: ['0', '1', '2', '3'] },
-      {
-        text: 'Sensacion de inquietud, nervios, intranquilidad',
+        text: 'Pensamientos anticipatorios negativos o catastroficos',
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Tension muscular o dolores en algunas partes del cuerpo',
+        text: 'Faltas de memoria te cuesta recordar cosas',
+        options: ['0', '1', '2', '3'],
+      },
+      {
+        text: 'Inseguridad a la hora de tomar decisiones (incluso simples)',
+        options: ['0', '1', '2', '3'],
+      },
+      {
+        text: 'Pensamientos rumiativos (le das muchas vueltas a las cosas)',
+        options: ['0', '1', '2', '3'],
+      },
+      {
+        text: 'Fumar o beber mas de lo habitual',
+        options: ['0', '1', '2', '3'],
+      },
+      {
+        text: 'Evitar determinadas situaciones',
+        options: ['0', '1', '2', '3'],
+      },
+      { text: 'Cambios en el apetito', options: ['0', '1', '2', '3'] },
+      { text: 'Cambios en la conducta sexual', options: ['0', '1', '2', '3'] },
+      { text: 'Llorar mas de lo habitual', options: ['0', '1', '2', '3'] },
+      {
+        text: 'Cambios de humor irritabilidad',
         options: ['0', '1', '2', '3'],
       },
     ];
@@ -105,6 +105,7 @@ export class TestComponent {
       this.openDialog('Debe seleccionar una opción antes de continuar.');
       return;
     }
+
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.saveAnswer();
       this.currentQuestionIndex++;
@@ -131,17 +132,40 @@ export class TestComponent {
       this.openDialog('Debe seleccionar una opción antes de continuar.');
       return;
     }
+
     this.saveAnswer();
-    // Calcula el puntaje total
+
     const totalScore = Object.values(this.answers).reduce(
       (sum, value) => sum + Number(value),
       0
     );
+
     this.answers['Puntaje Total'] = totalScore.toString();
 
-    // Aquí puedes enviar el JSON al servidor
-    console.log('Formulario enviado', this.answers);
-    //this.formularioService.sendForm(this.answers);
+    this.formularioService.sendForm(this.answers).subscribe((resp) => {
+      const prediccion = Number.parseInt(resp.prediccion);
+
+      switch (prediccion) {
+        case 0:
+          this.nivelAnsiedad = 'Ansiedad Baja';
+          this.paso = 3;
+          break;
+        case 1:
+          this.nivelAnsiedad = 'Ansiedad Leve';
+          this.paso = 4;
+          break;
+        case 2:
+          this.nivelAnsiedad = 'Ansiedad Moderada';
+          this.paso = 5;
+          break;
+        case 3:
+          this.nivelAnsiedad = 'Ansiedad Alta';
+          this.paso = 6;
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   openDialog(message: string): void {

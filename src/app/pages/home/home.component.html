@@ -1,1 +1,112 @@
-<div class="container"></div>
+<!-- home.component.html -->
+<div class="container my-5">
+  <div class="text-center">
+    <h1 class="mb-4">Bienvenido a la Evaluación de Ansiedad</h1>
+    <p class="lead mb-4">
+      Descubre tu nivel de ansiedad mediante nuestro test con inteligencia
+      artificial.
+    </p>
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="/test"
+      class="btn btn-primary btn-lg mb-5 fs-3 p-4"
+    >
+      Comenzar Test
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <mat-card
+        class="example-card text-center fs-4 card"
+        matRipple
+        [matRippleColor]="'rgba(0, 0, 0, 0.1)'"
+      >
+        <mat-card-header>
+          <mat-card-title>¿Qué es la ansiedad?</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/imgs/queEsAnsiedad.jpg"
+          alt="¿Qué es la ansiedad?"
+        />
+        <mat-card-content>
+          <p>
+            La ansiedad es una emoción normal que todos experimentamos, pero
+            cuando se vuelve excesiva puede afectar nuestra calidad de vida.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-6 mb-4">
+      <mat-card
+        class="example-card text-center fs-4 card"
+        matRipple
+        [matRippleColor]="'rgba(0, 0, 0, 0.1)'"
+      >
+        <mat-card-header>
+          <mat-card-title>Síntomas de la ansiedad</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/imgs/sintomasAnsiedad.jpg"
+          alt="Síntomas de la ansiedad"
+        />
+        <mat-card-content>
+          <p>
+            Los síntomas de la ansiedad pueden incluir nerviosismo, tensión,
+            insomnio, y otros síntomas físicos y emocionales.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <mat-card
+        class="example-card text-center fs-4"
+        matRipple
+        [matRippleColor]="'rgba(0, 0, 0, 0.1)'"
+      >
+        <mat-card-header>
+          <mat-card-title>Causas de la ansiedad</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/imgs/causasAnsiedad.jpg"
+          alt="Causas de la ansiedad"
+        />
+        <mat-card-content>
+          <p>
+            Las causas de la ansiedad pueden ser diversas, incluyendo factores
+            genéticos, ambientales y psicológicos.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-6 mb-4">
+      <mat-card
+        class="example-card text-center fs-4"
+        matRipple
+        [matRippleColor]="'rgba(0, 0, 0, 0.1)'"
+      >
+        <mat-card-header>
+          <mat-card-title>Cómo manejar la ansiedad</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/imgs/manejoAnsiedad.jpg"
+          alt="Cómo manejar la ansiedad"
+        />
+        <mat-card-content>
+          <p>
+            Existen muchas técnicas y tratamientos para manejar la ansiedad,
+            desde la terapia hasta la medicación.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

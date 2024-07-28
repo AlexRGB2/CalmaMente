@@ -1,8 +1,31 @@
 <div class="container">
   <div class="row align-items-center justify-content-center h-100">
     <div class="col-md-6">
-      @if(isTestStarted){
-      <mat-card>
+      @switch (paso) { @case (1) {
+      <mat-card
+        [class.mat-elevation-z2]="true"
+        class="animate__animated animate__fadeIn"
+      >
+        <mat-card-content>
+          <p class="text-center fs-1">Vamos con el test.</p>
+          <p class="text-center fs-5">
+            Al acabar verás los resultados en función de tus respuestas y los
+            puntos obtenidos.
+          </p>
+          <p class="text-center fs-5">
+            Cuando acabes, se mostrará su interpretación automáticamente.
+            Recuerda que es algo orientativo, y que no sustituye a una
+            evaluación de un profesional.
+          </p>
+        </mat-card-content>
+        <mat-card-footer class="text-center p-4">
+          <button mat-flat-button (click)="paso = 2" class="fs-5">
+            Iniciar
+          </button>
+        </mat-card-footer>
+      </mat-card>
+      } @case (2) {
+      <mat-card class="animate__animated animate__fadeIn">
         <mat-card-content class="text-center">
           <mat-progress-bar
             mode="determinate"
@@ -54,30 +77,107 @@
           </div>
         </mat-card-content>
       </mat-card>
-      } @else {
-      <mat-card
-        [class.mat-elevation-z2]="true"
-        class="animate__animated animate__pulse"
-      >
+      } @case (3) {
+      <mat-card class="animate__animated animate__fadeIn">
         <mat-card-content>
-          <p class="text-center fs-1">Vamos con el test.</p>
-          <p class="text-center fs-5">
-            Al acabar verás los resultados en función de tus respuestas y los
-            puntos obtenidos.
+          <h2 class="text-center fs-2">Ansiedad Baja</h2>
+          <p class="fs-5">
+            Para manejar la ansiedad baja, es fundamental incorporar ejercicio
+            físico regular en tu rutina. Actividades como caminar, correr o
+            practicar yoga no solo mejoran la salud física, sino que también
+            pueden ayudar a reducir la ansiedad y mejorar el estado de ánimo
+            general. Además, técnicas de relajación como la respiración
+            profunda, la meditación o la relajación muscular progresiva pueden
+            ser muy útiles para mantener la calma y prevenir que la ansiedad
+            aumente. Establecer y mantener una rutina diaria también proporciona
+            una sensación de control y previsibilidad, lo cual es reconfortante.
+            Dedicar tiempo a hobbies y actividades recreativas que disfrutes
+            puede ser una excelente manera de distraerte de preocupaciones
+            menores y promover el bienestar emocional.
           </p>
-          <p class="text-center fs-5">
-            Cuando acabes, se mostrará su interpretación automáticamente.
-            Recuerda que es algo orientativo, y que no sustituye a una
-            evaluación de un profesional.
-          </p>
+          <div class="button-group my-3">
+            <button mat-raised-button color="primary" routerLink="/home">
+              Finalizar
+            </button>
+          </div>
         </mat-card-content>
-        <mat-card-footer class="text-center p-4">
-          <button mat-flat-button (click)="isTestStarted = true" class="fs-5">
-            Iniciar
-          </button>
-        </mat-card-footer>
       </mat-card>
-      }
+      } @case (4) {
+      <mat-card class="animate__animated animate__fadeIn">
+        <mat-card-content>
+          <h2 class="text-center fs-2">Ansiedad Leve</h2>
+          <p class="fs-5">
+            Si experimentas ansiedad leve, llevar un diario de ansiedad puede
+            ser una herramienta valiosa. Escribir tus pensamientos y
+            sentimientos te permite identificar patrones y desencadenantes que
+            pueden estar contribuyendo a tu ansiedad. Desarrollar técnicas
+            cognitivas para cuestionar y reestructurar pensamientos negativos o
+            irracionales es otra estrategia efectiva. Además, contar con una red
+            de apoyo, ya sea a través de amigos, familiares o grupos de apoyo,
+            puede proporcionar consuelo y perspectivas diferentes que ayuden a
+            manejar la ansiedad. Limitar el consumo de cafeína, alcohol y otros
+            estimulantes también puede ser beneficioso, ya que estos pueden
+            exacerbar los síntomas de la ansiedad.
+          </p>
+          <div class="button-group my-3">
+            <button mat-raised-button color="primary" routerLink="/home">
+              Finalizar
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      }@case (5) {
+      <mat-card class="animate__animated animate__fadeIn">
+        <mat-card-content>
+          <h2 class="text-center fs-2">Ansiedad Moderada</h2>
+          <p class="fs-5">
+            Para la ansiedad moderada, la terapia cognitivo-conductual (TCC) es
+            altamente recomendable. Trabajar con un terapeuta te ayudará a
+            aprender a gestionar y reducir la ansiedad mediante técnicas
+            estructuradas y efectivas. Incorporar actividad física intensa, como
+            correr, nadar o entrenar en el gimnasio, puede proporcionar un
+            alivio significativo del estrés y la ansiedad. Practicar técnicas de
+            mindfulness, que te ayudan a mantener el enfoque en el presente y
+            reducir la rumiación, también es beneficioso. Establecer metas
+            pequeñas y alcanzables puede hacer que las tareas grandes parezcan
+            menos abrumadoras, y celebrar tus logros, por pequeños que sean,
+            puede aumentar tu confianza y reducir la ansiedad.
+          </p>
+          <div class="button-group my-3">
+            <button mat-raised-button color="primary" routerLink="/home">
+              Finalizar
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      }@case (6) {
+      <mat-card class="animate__animated animate__fadeIn">
+        <mat-card-content>
+          <h2 class="text-center fs-2">Ansiedad Alta</h2>
+          <p class="fs-5">
+            Para la ansiedad alta, es crucial buscar terapia profesional.
+            Consultar con un psicólogo o psiquiatra te permitirá recibir un
+            tratamiento especializado que puede incluir terapia
+            cognitivo-conductual, terapia de exposición o, en algunos casos,
+            medicación. Los medicamentos ansiolíticos o antidepresivos,
+            prescritos por un profesional de salud, pueden ser necesarios para
+            ayudar a manejar los síntomas severos. Desarrollar estrategias de
+            enfrentamiento, como tener un plan de acción o una lista de recursos
+            para manejar crisis de ansiedad, puede ser muy útil. Priorizar el
+            autocuidado intensivo, incluyendo el descanso adecuado, una buena
+            nutrición y actividades que promuevan el bienestar físico y
+            emocional, es esencial. Finalmente, identificar y, si es posible,
+            reducir o eliminar los estresores significativos en tu vida puede
+            ayudar a disminuir la ansiedad considerablemente.
+          </p>
+          <div class="button-group my-3">
+            <button mat-raised-button color="primary" routerLink="/home">
+              Finalizar
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      }}
     </div>
   </div>
 </div>
