@@ -2,46 +2,56 @@
   <div class="row align-items-center justify-content-center h-100">
     <div class="col-md-6">
       @if(isTestStarted){
-      <mat-card
-        [class.mat-elevation-z2]="true"
-        class="animate__animated animate__pulse"
-      >
-        <mat-card-content>
-          <p class="text-center fs-4">
-            ¿Con qué frecuencia tienes cada síntoma? Selecciona las opciones que
-            más se ajusten a ti.
-          </p>
-          <p class="text-center fs-5">{{ preguntas[indexPregunta] }}</p>
-          <mat-radio-group
-            aria-label="Select an option"
-            class="d-flex justify-content-center"
-            [(ngModel)]="opcion"
-          >
-            <div class="row d-flex justify-content-center">
-              @for (op of opciones; track $index) {
-              <div class="col-12 text-center">
-                <mat-radio-button [value]="op" (clic)="nextQuestion()">{{
-                  opcionesText[op]
-                }}</mat-radio-button>
-              </div>
-              }
-            </div>
-          </mat-radio-group>
-          <mat-card-footer class="d-flex justify-content-center p-4">
-            <button mat-flat-button (click)="nextQuestion()" class="me-2">
-              Siguiente
-            </button>
-            @if(indexPregunta == preguntas.length - 1){
-            <button
-              mat-flat-button
-              class="ms-2"
-              style="background-color: lawngreen"
-              (click)="saveAnswers()"
+      <mat-card>
+        <mat-card-content class="text-center">
+          <mat-progress-bar
+            mode="determinate"
+            [value]="((currentQuestionIndex + 1) / questions.length) * 100"
+          ></mat-progress-bar>
+          <div *ngIf="questions.length">
+            <p class="fs-3 mt-4">
+              ¿Con qué frecuencia tienes cada síntoma? Selecciona las opciones
+              que más se ajusten a ti
+            </p>
+            <h2>{{ currentQuestion.text }}</h2>
+            <mat-radio-group
+              [(ngModel)]="selectedOption"
+              class="d-flex flex-column align-items-center"
             >
-              Enviar Respuestas
-            </button>
-            }
-          </mat-card-footer>
+              <div *ngFor="let option of currentQuestion.options" class="my-2">
+                <mat-radio-button [value]="option">
+                  @if (option == '0') { Nunca } @else if (option == '1')
+                  {Aveces} @else if (option == '2') {A menudo} @else {Siempre}
+                </mat-radio-button>
+              </div>
+            </mat-radio-group>
+            <div class="button-group my-3">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="prevQuestion()"
+                [disabled]="currentQuestionIndex === 0"
+              >
+                Anterior
+              </button>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="nextQuestion()"
+                *ngIf="currentQuestionIndex < questions.length - 1"
+              >
+                Siguiente
+              </button>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="submit()"
+                *ngIf="currentQuestionIndex === questions.length - 1"
+              >
+                Enviar
+              </button>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
       } @else {

@@ -8,6 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const myModules: any = [
   MatToolbarModule,
@@ -19,6 +20,7 @@ const myModules: any = [
   MatCardModule,
   MatInputModule,
   MatRadioModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({ imports: [...myModules], exports: [...myModules] })
