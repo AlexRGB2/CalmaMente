@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, withViewTransitions } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,7 +13,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/test/test.module').then((m) => m.TestModule),
   },
-  { path: 'dataset', loadChildren: () => import('./pages/dataset/dataset.module').then(m => m.DatasetModule) },
+  {
+    path: 'dataset',
+    loadChildren: () =>
+      import('./pages/dataset/dataset.module').then((m) => m.DatasetModule),
+  },
 ];
 
 @NgModule({

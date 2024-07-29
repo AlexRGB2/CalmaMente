@@ -36,7 +36,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+            ],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,

@@ -10,9 +10,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './shared/modules/material.module';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule } from '@angular/forms';
+import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -21,11 +27,17 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     SidenavComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    FormsModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+  ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([loaderInterceptor])),
   ],
   bootstrap: [AppComponent],
 })
