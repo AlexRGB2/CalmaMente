@@ -55,7 +55,7 @@ export class TestComponent {
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Problemas de concentracion (incluso en tareas sencillas)',
+        text: 'Problemas de concentracion incluso en tareas sencillas',
         options: ['0', '1', '2', '3'],
       },
       {
@@ -71,11 +71,11 @@ export class TestComponent {
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Inseguridad a la hora de tomar decisiones (incluso simples)',
+        text: 'Inseguridad a la hora de tomar decisiones incluso simples',
         options: ['0', '1', '2', '3'],
       },
       {
-        text: 'Pensamientos rumiativos (le das muchas vueltas a las cosas)',
+        text: 'Pensamientos rumiativos le das muchas vueltas a las cosas',
         options: ['0', '1', '2', '3'],
       },
       {

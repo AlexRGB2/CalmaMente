@@ -1,0 +1,45 @@
+<div class="container">
+  <section class="example-section" [formGroup]="columnasForm">
+    <h4 class="fs-1">Selecciona las columnas del Set de Datos:</h4>
+
+    <!-- Checkbox para seleccionar o deseleccionar todos -->
+    <mat-checkbox (change)="toggleSelectAll($event)"
+      >Seleccionar Todo</mat-checkbox
+    >
+
+    <div class="row">
+      <!-- Primera columna -->
+      <div class="col-md-6">
+        <ng-container
+          *ngFor="
+            let columna of columnas.slice(0, columnas.length / 2);
+            let i = index
+          "
+        >
+          <p>
+            <mat-checkbox [formControlName]="i + 1">{{ columna }}</mat-checkbox>
+          </p>
+        </ng-container>
+      </div>
+      <!-- Segunda columna -->
+      <div class="col-md-6">
+        <ng-container
+          *ngFor="
+            let columna of columnas.slice(columnas.length / 2, columnas.length);
+            let i = index
+          "
+        >
+          <p>
+            <mat-checkbox [formControlName]="i + columnas.length / 2">{{
+              columna
+            }}</mat-checkbox>
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <button mat-raised-button (click)="onSubmit()" class="fs-4 p-4">
+      <mat-icon class="fs-4">download</mat-icon> Descargar CSV
+    </button>
+  </section>
+</div>

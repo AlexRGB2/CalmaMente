@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/test/test.module').then((m) => m.TestModule),
   },
+  { path: 'dataset', loadChildren: () => import('./pages/dataset/dataset.module').then(m => m.DatasetModule) },
 ];
 
 @NgModule({

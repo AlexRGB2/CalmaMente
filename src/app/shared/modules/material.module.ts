@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const myModules: any = [
   MatToolbarModule,
@@ -23,6 +24,7 @@ const myModules: any = [
   MatRadioModule,
   MatProgressBarModule,
   MatRippleModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({ imports: [...myModules], exports: [...myModules] })

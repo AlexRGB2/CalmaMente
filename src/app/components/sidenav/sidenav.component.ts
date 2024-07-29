@@ -19,6 +19,7 @@ export class SidenavComponent {
       ...[
         { icon: 'home', name: 'Inicio', route: '/' },
         { icon: 'psychology', name: 'Test', route: 'test' },
+        { icon: 'dataset', name: 'Exportar Set de Datos', route: 'dataset' },
       ]
     );
   }
