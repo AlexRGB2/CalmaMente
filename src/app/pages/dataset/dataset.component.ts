@@ -78,30 +78,8 @@ export class DatasetComponent {
 
     const filtros: Filtros = { columnas: selectedColumns };
 
-    this.formularioService.getCSV(filtros).subscribe((resp) => {
-      this.downloadCSV(resp.rows);
-    });
-  }
+    console.log(filtros);
 
-  downloadCSV(dataString: string) {
-    // Eliminar prefijo y sufijo
-    const csvData = dataString
-      .replace(/^data='/, '')
-      .replace(/' count=None$/, '');
-
-    const cleanedData = csvData.replace(/\\n/g, '\n');
-
-    // Crear un Blob con el contenido CSV
-    const blob = new Blob([cleanedData], { type: 'text/csv;charset=utf-8;' });
-
-    // Crear un enlace para descargar el archivo
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'CalmaMente_dataset.csv';
-
-    // Simular un clic en el enlace para iniciar la descarga
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    this.formularioService.descargarCSV(filtros);
   }
 }

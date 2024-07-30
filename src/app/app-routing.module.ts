@@ -18,6 +18,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/dataset/dataset.module').then((m) => m.DatasetModule),
   },
+  { path: 'adminModels', loadChildren: () => import('./pages/admin-models/admin-models.module').then(m => m.AdminModelsModule) },
 ];
 
 @NgModule({

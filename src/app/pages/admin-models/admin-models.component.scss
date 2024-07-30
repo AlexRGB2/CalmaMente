@@ -1,0 +1,39 @@
+.contenedor {
+  padding: 5vh;
+  display: flex;
+}
+
+.adminModelos {
+  max-width: 23vw;
+  overflow: scroll;
+  padding: 1vh;
+}
+
+.adminModelos::-webkit-scrollbar {
+  display: none;
+}
+
+.modelos button.principal {
+  background-color: rgba(0, 255, 255, 0.418);
+}
+
+.modelos button.eliminar {
+  color: #e63946;
+}
+
+::ng-deep .custom-tooltip {
+  transform: scale(1.6) !important;
+  position: relative !important;
+}
+
+mat-icon {
+  transform: scale(1.5);
+}
+
+.mat-mdc-card {
+  --mdc-outlined-card-outline-color: var(--card-outline-color);
+}
+
+.input-field {
+  margin-right: 32px; // Ajusta el valor según sea necesario
+}
