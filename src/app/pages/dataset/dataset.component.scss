@@ -1,22 +1,21 @@
 .container {
-  padding: 5vh;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .example-section {
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
   mat-checkbox {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 }
 
 .cont {
   display: flex;
+}
+
+mat-checkbox {
+  transform: scale(1.3);
 }

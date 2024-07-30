@@ -1,19 +1,25 @@
 <div class="container">
   <section class="example-section" [formGroup]="columnasForm">
-    <div class="cont">
+    <div class="cont mb-5 animate__animated animate__fadeInUp">
       <h4 class="fs-1">Selecciona las columnas del Set de Datos:</h4>
-      <button mat-raised-button (click)="onSubmit()" class="fs-4 p-4 ms-5">
+      <button mat-flat-button (click)="onSubmit()" class="fs-5 p-4 ms-5">
         <mat-icon class="fs-4">download</mat-icon> Descargar CSV
       </button>
     </div>
     <!-- Checkbox para seleccionar o deseleccionar todos -->
-    <mat-checkbox (change)="toggleSelectAll($event)">
-      Seleccionar Todo
-    </mat-checkbox>
+    <div class="row animate__animated animate__lightSpeedInLeft">
+      <div class="col-8">
+        <mat-checkbox (change)="toggleSelectAll($event)">
+          Seleccionar Todo
+        </mat-checkbox>
+      </div>
+    </div>
 
     <div class="row">
       <!-- Primera columna -->
-      <div class="col-md-6">
+      <div
+        class="col-md-8 col-sm-12 animate__animated animate__lightSpeedInLeft"
+      >
         <ng-container
           *ngFor="
             let columna of columnas.slice(0, columnas.length / 2);
@@ -26,7 +32,9 @@
         </ng-container>
       </div>
       <!-- Segunda columna -->
-      <div class="col-md-6">
+      <div
+        class="col-md-4 col-sm-12 animate__animated animate__lightSpeedInRight"
+      >
         <ng-container
           *ngFor="
             let columna of columnas.slice(columnas.length / 2, columnas.length);

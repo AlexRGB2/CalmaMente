@@ -18,7 +18,7 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -36,6 +36,7 @@ registerLocaleData(localEs, 'es');
     AppRoutingModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
   providers: [

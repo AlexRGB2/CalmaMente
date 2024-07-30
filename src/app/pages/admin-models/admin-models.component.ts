@@ -11,53 +11,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AdminModelsComponent implements OnInit {
   modelos: ModelosNS[] = [];
-  tipoModelos: string[] = ['kmeans', 'gauss'];
-  selectedAlgorithm: string = 'kmeans';
-  algorithmForm: FormGroup;
+  displayedColumns: string[] = [
+    'tipo',
+    'nombre',
+    'fecha de creación',
+    'parametros',
+    'acciones',
+  ];
 
-  constructor(private modelosService: ModelsService, private fb: FormBuilder) {
-    this.algorithmForm = this.fb.group({
-      KMeans: this.fb.group({
-        n_clusters: [4, Validators.required],
-        random_state: [42, Validators.required],
-        n_init: [10, Validators.required],
-        max_iter: [3000, Validators.required],
-      }),
-      Gauss: this.fb.group({
-        n_components: [4, Validators.required],
-        random_state: [42, Validators.required],
-        n_init: [1, Validators.required],
-        max_iter: [3000, Validators.required],
-      }),
-    });
-  }
+  constructor(private modelosService: ModelsService) {}
 
   ngOnInit(): void {
     this.obtenerModelos();
   }
 
-  deleteModel(id: number, nombre: string) {
-    Swal.fire({
-      title: '¡Cuidado!',
-      text: `¿Estas seguro de eliminar ${nombre}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, eliminar!',
-      cancelButtonText: 'No',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.modelosService.deleteModel(id).subscribe((resp: any) => {
-          if (resp.mensaje) {
-            Swal.fire({ title: resp.mensaje, icon: 'success' });
-            this.obtenerModelos();
-          } else {
-            Swal.fire({ title: resp.error, icon: 'error' });
-          }
-        });
-      }
-    });
+  deleteModel(id: number, nombre: string, isDefault: boolean) {
+    if (!isDefault) {
+      Swal.fire({
+        title: '¡Cuidado!',
+        text: `¿Estas seguro de eliminar ${nombre}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, eliminar!',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.modelosService.deleteModel(id).subscribe((resp: any) => {
+            if (resp.mensaje) {
+              Swal.fire({ title: resp.mensaje, icon: 'success' });
+              this.obtenerModelos();
+            } else {
+              Swal.fire({ title: resp.error, icon: 'error' });
+            }
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'Advertencia',
+        text: 'No puedes eliminar el modelo Default.',
+        icon: 'info',
+      });
+    }
   }
 
   obtenerModelos() {
@@ -78,9 +75,5 @@ export class AdminModelsComponent implements OnInit {
         Swal.fire({ title: resp.error, icon: 'error' });
       }
     });
-  }
-
-  onAlgorithmChange(event: any) {
-    this.selectedAlgorithm = event.value;
   }
 }

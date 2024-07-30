@@ -1,0 +1,172 @@
+<div class="container p-5">
+  <div class="mt-3">
+    <button mat-flat-button class="fs-4 p-4 mb-5" routerLink="/adminModels">
+      <mat-icon>arrow_back</mat-icon> Volver
+    </button>
+    <div class="row">
+      <div class="col-3">
+        <h4>Tipo de Algoritmo</h4>
+        <mat-form-field class="full-width">
+          <mat-select
+            (selectionChange)="onAlgorithmChange($event)"
+            [value]="selectedAlgorithm"
+          >
+            @for (op of tipoModelos; track $index) {
+            <mat-option [value]="op">{{ op }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <h4>Nombre</h4>
+        <mat-form-field class="full-width">
+          <input matInput type="text" [(ngModel)]="nombreAlgoritmo" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h4>Opciones del algoritmo</h4>
+      <div *ngIf="selectedAlgorithm">
+        <form *ngIf="selectedAlgorithm === 'kmeans'" [formGroup]="kmeansForm">
+          <div class="row">
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>n_clusters</mat-label>
+                <input matInput formControlName="n_clusters" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>random_state</mat-label>
+                <input matInput formControlName="random_state" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>n_init</mat-label>
+                <input matInput formControlName="n_init" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>max_iter</mat-label>
+                <input matInput formControlName="max_iter" type="number" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-3">
+              <button
+                type="button"
+                mat-flat-button
+                (click)="fileInput.click()"
+                class="fs-4 p-4"
+              >
+                <mat-icon>upload</mat-icon>
+                Subir Set de Datos
+              </button>
+              @if (dataset) {
+              <mat-label class="fs-5 ms-5 link-success"
+                >Archivo Cargado</mat-label
+              >
+              }
+
+              <input
+                hidden
+                (change)="onFileSelected()"
+                #fileInput
+                type="file"
+                id="file"
+              />
+            </div>
+            <div class="col-4">
+              <button
+                type="button"
+                mat-flat-button
+                class="fs-4 p-4"
+                [disabled]="
+                  !kmeansForm.valid || !(nombreAlgoritmo.length > 0) || !dataset
+                "
+                (click)="newModel()"
+              >
+                <mat-icon>dynamic_form</mat-icon>
+                Entrenar Nuevo Modelo
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <form *ngIf="selectedAlgorithm === 'gauss'" [formGroup]="gaussForm">
+          <div class="row">
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>n_components</mat-label>
+                <input matInput formControlName="n_components" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>random_state</mat-label>
+                <input matInput formControlName="random_state" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>n_init</mat-label>
+                <input matInput formControlName="n_init" type="number" />
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>max_iter</mat-label>
+                <input matInput formControlName="max_iter" type="number" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-3">
+              <button
+                type="button"
+                mat-flat-button
+                (click)="fileInput.click()"
+                class="fs-4 p-4"
+              >
+                <mat-icon>upload</mat-icon>
+                Subir Set de Datos
+              </button>
+              @if (dataset) {
+              <mat-label class="fs-5 ms-5 link-success"
+                >Archivo Cargado</mat-label
+              >
+              }
+              <input
+                hidden
+                (change)="onFileSelected()"
+                #fileInput
+                type="file"
+                id="file"
+              />
+            </div>
+            <div class="col-4">
+              <button
+                type="button"
+                mat-flat-button
+                class="fs-4 p-4"
+                [disabled]="
+                  !gaussForm.valid || !(nombreAlgoritmo.length > 0) || !dataset
+                "
+                (click)="newModel()"
+              >
+                <mat-icon>dynamic_form</mat-icon>
+                Entrenar Nuevo Modelo
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

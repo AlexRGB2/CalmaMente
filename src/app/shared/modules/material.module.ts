@@ -13,6 +13,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const myModules: any = [
   MatToolbarModule,
@@ -29,6 +31,8 @@ const myModules: any = [
   MatCheckboxModule,
   MatTooltipModule,
   MatSelectModule,
+  MatTableModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({ imports: [...myModules], exports: [...myModules] })

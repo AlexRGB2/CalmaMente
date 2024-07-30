@@ -11,5 +11,5 @@ export interface EntrenamientoModelo {
   tipo: string;
   nombre: string;
   parametros: {};
-  dataset: string;
+  dataset: {};
 }

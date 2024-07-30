@@ -1,23 +1,19 @@
 .contenedor {
   padding: 5vh;
-  display: flex;
+  height: 85vh;
 }
 
-.adminModelos {
-  max-width: 23vw;
-  overflow: scroll;
-  padding: 1vh;
+.table-container {
+  position: relative;
+  max-height: 65vh;
+  overflow: auto;
 }
 
-.adminModelos::-webkit-scrollbar {
-  display: none;
-}
-
-.modelos button.principal {
+.contenedor button.principal {
   background-color: rgba(0, 255, 255, 0.418);
 }
 
-.modelos button.eliminar {
+.contenedor button.eliminar {
   color: #e63946;
 }
 
@@ -27,13 +23,10 @@
 }
 
 mat-icon {
-  transform: scale(1.5);
+  transform: scale(2);
 }
 
-.mat-mdc-card {
-  --mdc-outlined-card-outline-color: var(--card-outline-color);
-}
-
-.input-field {
-  margin-right: 32px; // Ajusta el valor según sea necesario
+td,
+th {
+  font-size: 20px;
 }

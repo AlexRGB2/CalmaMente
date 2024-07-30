@@ -18,7 +18,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/dataset/dataset.module').then((m) => m.DatasetModule),
   },
-  { path: 'adminModels', loadChildren: () => import('./pages/admin-models/admin-models.module').then(m => m.AdminModelsModule) },
+  {
+    path: 'adminModels',
+    loadChildren: () =>
+      import('./pages/admin-models/admin-models.module').then(
+        (m) => m.AdminModelsModule
+      ),
+  },
+  {
+    path: 'adminModels/newModel',
+    loadChildren: () =>
+      import('./pages/new-model/new-model.module').then(
+        (m) => m.NewModelModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@
           </p>
         </mat-card-content>
         <mat-card-footer class="text-center p-4">
-          <button mat-flat-button (click)="paso = 2" class="fs-5">
+          <button mat-flat-button (click)="paso = 2" class="fs-5 p-4">
             Iniciar
           </button>
         </mat-card-footer>
@@ -50,24 +50,27 @@
             </mat-radio-group>
             <div class="button-group my-3">
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
+                class="fs-5 p-4"
                 (click)="prevQuestion()"
                 [disabled]="currentQuestionIndex === 0"
               >
                 Anterior
               </button>
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
+                class="fs-5 p-4"
                 (click)="nextQuestion()"
                 *ngIf="currentQuestionIndex < questions.length - 1"
               >
                 Siguiente
               </button>
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
+                class="fs-5 p-4"
                 (click)="submit()"
                 *ngIf="currentQuestionIndex === questions.length - 1"
               >
@@ -96,7 +99,12 @@
             menores y promover el bienestar emocional.
           </p>
           <div class="button-group my-3">
-            <button mat-raised-button color="primary" routerLink="/home">
+            <button
+              mat-flat-button
+              color="primary"
+              routerLink="/home"
+              class="fs-5 p-4"
+            >
               Finalizar
             </button>
           </div>
@@ -120,7 +128,12 @@
             exacerbar los síntomas de la ansiedad.
           </p>
           <div class="button-group my-3">
-            <button mat-raised-button color="primary" routerLink="/home">
+            <button
+              mat-flat-button
+              color="primary"
+              routerLink="/home"
+              class="fs-5 p-4"
+            >
               Finalizar
             </button>
           </div>
@@ -144,7 +157,12 @@
             puede aumentar tu confianza y reducir la ansiedad.
           </p>
           <div class="button-group my-3">
-            <button mat-raised-button color="primary" routerLink="/home">
+            <button
+              mat-flat-button
+              color="primary"
+              routerLink="/home"
+              class="fs-5 p-4"
+            >
               Finalizar
             </button>
           </div>
@@ -171,7 +189,12 @@
             ayudar a disminuir la ansiedad considerablemente.
           </p>
           <div class="button-group my-3">
-            <button mat-raised-button color="primary" routerLink="/home">
+            <button
+              mat-flat-button
+              color="primary"
+              routerLink="/home"
+              class="fs-5 p-4"
+            >
               Finalizar
             </button>
           </div>

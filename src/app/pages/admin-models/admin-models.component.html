@@ -1,131 +1,96 @@
 <div class="contenedor">
-  <div class="adminModelos">
-    <mat-card appearance="outlined" [class.mat-elevation-z16]="true">
-      <mat-card-header>
-        <mat-card-title class="mt-3 fs-2"
-          >Administración de Modelos</mat-card-title
-        >
-      </mat-card-header>
-      <mat-card-content class="modelos mt-3">
-        @for (modelo of modelos; track $index) {
-        <div class="row fs-3 mt-4">
-          <div class="col-6">
-            <p>Tipo: {{ modelo.tipo }}</p>
-            <p class="mt-2">Nombre: {{ modelo.nombre }}</p>
-            <p>
-              Fecha de Creación: {{ modelo.created_at | date : "longDate" }}
-            </p>
-          </div>
-          <div class="col">
-            <button
-              mat-icon-button
-              matTooltip="Eliminar modelo"
-              matTooltipPosition="above"
-              matTooltipClass="custom-tooltip"
-              class="eliminar"
-              (click)="deleteModel(modelo.id, modelo.nombre)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-          <div class="col">
-            <button
-              mat-icon-button
-              matTooltip="Contestar formulario"
-              matTooltipPosition="above"
-              matTooltipClass="custom-tooltip"
-            >
-              <mat-icon>assignment</mat-icon>
-            </button>
-          </div>
-          <div class="col">
-            @if(!modelo.principal){
-            <button
-              mat-icon-button
-              matTooltip="Definir Default"
-              matTooltipPosition="above"
-              matTooltipClass="custom-tooltip"
-              (click)="setDefault(modelo.id)"
-            >
-              <mat-icon>check</mat-icon>
-            </button>
-            } @else {
-            <button
-              mat-icon-button
-              matTooltip="Modelo Default"
-              matTooltipPosition="above"
-              matTooltipClass="custom-tooltip"
-              class="principal"
-            >
-              <mat-icon>check</mat-icon>
-            </button>
-            }
-          </div>
-        </div>
-        }
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <button
+    mat-flat-button
+    class="fs-5 p-4 mb-4 animate__animated animate__flipInX"
+    routerLink="newModel"
+  >
+    <mat-icon>add_circle</mat-icon>
+    <p class="p-2 mt-3">Nuevo Modelo</p>
+  </button>
+  <div class="table-container animate__animated animate__fadeInUp">
+    <table mat-table [dataSource]="modelos" class="mat-elevation-z8">
+      <!-- Tipo Column -->
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tipo }}
+        </td>
+      </ng-container>
 
-  <div class="container mt-3">
-    <h4>Tipo de Algoritmo</h4>
-    <mat-form-field>
-      <mat-select
-        (selectionChange)="onAlgorithmChange($event)"
-        [value]="selectedAlgorithm"
-      >
-        @for (op of tipoModelos; track $index) {
-        <mat-option [value]="op">{{ op }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
 
-    <h4>Opciones del algoritmo</h4>
-    <!-- Formulario para Entrenar Modelo -->
-    <div *ngIf="selectedAlgorithm">
-      <div *ngIf="selectedAlgorithm === 'kmeans'">
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>n_clusters</mat-label>
-          <input matInput formControlName="n_clusters" type="number" />
-        </mat-form-field>
+      <!-- Fecha de Creación Column -->
+      <ng-container matColumnDef="fecha de creación">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.created_at | date : "longDate" }}
+        </td>
+      </ng-container>
 
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>random_state</mat-label>
-          <input matInput formControlName="random_state" type="number" />
-        </mat-form-field>
+      <!-- Parametros Column -->
+      <ng-container matColumnDef="parametros">
+        <th mat-header-cell *matHeaderCellDef>Parametros</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.parametros }}
+        </td>
+      </ng-container>
 
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>n_init</mat-label>
-          <input matInput formControlName="n_init" type="number" />
-        </mat-form-field>
+      <!-- Accioness Column -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element" class="p-4">
+          <button
+            mat-icon-button
+            matTooltip="Eliminar modelo"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"
+            class="eliminar mx-2"
+            (click)="deleteModel(element.id, element.nombre, element.principal)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
 
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>max_iter</mat-label>
-          <input matInput formControlName="max_iter" type="number" />
-        </mat-form-field>
-      </div>
+          <button
+            mat-icon-button
+            matTooltip="Contestar formulario"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"
+            class="mx-2"
+          >
+            <mat-icon>assignment</mat-icon>
+          </button>
 
-      <div *ngIf="selectedAlgorithm === 'gauss'">
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>n_components</mat-label>
-          <input matInput formControlName="n_components" type="number" />
-        </mat-form-field>
+          @if(!element.principal){
+          <button
+            mat-icon-button
+            matTooltip="Definir Default"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"
+            (click)="setDefault(element.id)"
+            class="mx-2"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+          } @else {
+          <button
+            mat-icon-button
+            matTooltip="Modelo Default"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"
+            class="principal mx-2"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+          }
+        </td>
+      </ng-container>
 
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>random_state</mat-label>
-          <input matInput formControlName="random_state" type="number" />
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>n_init</mat-label>
-          <input matInput formControlName="n_init" type="number" />
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="input-field">
-          <mat-label>max_iter</mat-label>
-          <input matInput formControlName="max_iter" type="number" />
-        </mat-form-field>
-      </div>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </div>
