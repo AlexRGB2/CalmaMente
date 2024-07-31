@@ -83,13 +83,33 @@ export class AdminModelsComponent implements OnInit {
     this.modelosService.getStats(id).subscribe((resp) => {
       console.log(resp);
       const item = resp.datos.find((d) => d.tipo === '2.1');
+      const metodoCodo = resp.datos.find((d) => d.tipo === '2.2');
+      const totalClusters = resp.datos.find((d) => d.tipo === '2.3');
 
-      if (item) {
+      if (item && totalClusters && metodoCodo) {
         const json = {
           nombre: item.nombre,
           valor: item.valor,
         };
         localStorage.setItem(item.tipo, JSON.stringify(json));
+
+        // Tipo 2.2
+        localStorage.setItem(
+          metodoCodo.tipo,
+          JSON.stringify({
+            nombre: metodoCodo.nombre,
+            valor: metodoCodo.valor,
+          })
+        );
+
+        // Tipo 2.3
+        localStorage.setItem(
+          totalClusters.tipo,
+          JSON.stringify({
+            nombre: totalClusters.nombre,
+            valor: totalClusters.valor,
+          })
+        );
         this.isVisibleChart = true;
       } else {
         console.log("No se encontró un objeto con el tipo '2.1'");

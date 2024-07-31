@@ -2,16 +2,44 @@
   <button mat-flat-button class="fs-4 p-4 mb-5" (click)="setVisibleCharts()">
     <mat-icon>arrow_back</mat-icon> Volver
   </button>
-  <div id="chart">
+  <div id="chartDispersionClusters">
     <apx-chart
-      [series]="chartOptions.series!"
-      [chart]="chartOptions.chart!"
-      [xaxis]="chartOptions.xaxis!"
-      [yaxis]="chartOptions.yaxis!"
-      [theme]="chartOptions.theme!"
-      [markers]="chartOptions.markers!"
-      [legend]="chartOptions.legend!"
-      [title]="chartOptions.title!"
+      [series]="chartOptionsDispersionClusters.series!"
+      [chart]="chartOptionsDispersionClusters.chart!"
+      [xaxis]="chartOptionsDispersionClusters.xaxis!"
+      [yaxis]="chartOptionsDispersionClusters.yaxis!"
+      [theme]="chartOptionsDispersionClusters.theme!"
+      [markers]="chartOptionsDispersionClusters.markers!"
+      [legend]="chartOptionsDispersionClusters.legend!"
+      [title]="chartOptionsDispersionClusters.title!"
+    ></apx-chart>
+  </div>
+
+  <div id="chartMetodoCodo">
+    <apx-chart
+      [series]="chartMetodoCodo.series!"
+      [chart]="chartMetodoCodo.chart!"
+      [xaxis]="chartMetodoCodo.xaxis!"
+      [yaxis]="chartMetodoCodo.yaxis!"
+      [theme]="chartMetodoCodo.theme!"
+      [markers]="chartMetodoCodo.markers!"
+      [legend]="chartMetodoCodo.legend!"
+      [title]="chartMetodoCodo.title!"
+      [plotOptions]="chartMetodoCodo.plotOptions!"
+    ></apx-chart>
+  </div>
+
+  <div id="chartTotalClusters">
+    <apx-chart
+      [series]="chartOptionsTotalClusters.series!"
+      [chart]="chartOptionsTotalClusters.chart!"
+      [xaxis]="chartOptionsTotalClusters.xaxis!"
+      [yaxis]="chartOptionsTotalClusters.yaxis!"
+      [theme]="chartOptionsTotalClusters.theme!"
+      [markers]="chartOptionsTotalClusters.markers!"
+      [legend]="chartOptionsTotalClusters.legend!"
+      [title]="chartOptionsTotalClusters.title!"
+      [plotOptions]="chartOptionsTotalClusters.plotOptions!"
     ></apx-chart>
   </div>
 </div>
