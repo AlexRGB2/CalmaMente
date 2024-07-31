@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModelosNS } from '../../shared/models/modelosia.models';
 import { ModelsService } from '../../shared/services/models.service';
 import Swal from 'sweetalert2';
+import saveAs from 'file-saver';
 
 @Component({
   selector: 'app-admin-models',
@@ -98,5 +99,32 @@ export class AdminModelsComponent implements OnInit {
 
   onVisibleCharts(isVisible: boolean): void {
     this.isVisibleChart = isVisible;
+  }
+
+  downModel(id: number, nombre: string) {
+    Swal.fire({
+      title: '¡Cuidado!',
+      text: `¿Estas seguro de descargar el modelo ${nombre}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, descargar!',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.modelosService.downModel(id).subscribe(
+          (response: Blob) => {
+            const blob = new Blob([response], {
+              type: 'application/octet-stream',
+            });
+            saveAs(blob, nombre + '.pkl');
+          },
+          (error) => {
+            console.error('Error al descargar el modelo:', error);
+          }
+        );
+      }
+    });
   }
 }

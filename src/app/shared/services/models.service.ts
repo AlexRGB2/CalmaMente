@@ -25,6 +25,14 @@ export class ModelsService {
     return this.http.post(`${this.BASE_URL}/eliminar`, json);
   }
 
+  downModel(id: number) {
+    const json = { id: id };
+
+    return this.http.post(`${this.BASE_URL}/descargar`, json, {
+      responseType: 'blob',
+    });
+  }
+
   setDefaultModel(id: number) {
     const json = { id: id };
 
