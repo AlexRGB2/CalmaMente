@@ -32,6 +32,13 @@ const routes: Routes = [
         (m) => m.NewModelModule
       ),
   },
+  {
+    path: 'chartsModel',
+    loadChildren: () =>
+      import('./pages/charts-model/charts-model.module').then(
+        (m) => m.ChartsModelModule
+      ),
+  },
 ];
 
 @NgModule({

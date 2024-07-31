@@ -1,0 +1,17 @@
+<div class="container mt-5 mb-5">
+  <button mat-flat-button class="fs-4 p-4 mb-5" (click)="setVisibleCharts()">
+    <mat-icon>arrow_back</mat-icon> Volver
+  </button>
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [xaxis]="chartOptions.xaxis!"
+      [yaxis]="chartOptions.yaxis!"
+      [theme]="chartOptions.theme!"
+      [markers]="chartOptions.markers!"
+      [legend]="chartOptions.legend!"
+      [title]="chartOptions.title!"
+    ></apx-chart>
+  </div>
+</div>

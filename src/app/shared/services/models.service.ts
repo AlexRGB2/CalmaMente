@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EntrenamientoModelo, ModelosNS } from '../models/modelosia.models';
 import { environment } from '../../../environments/environment.development';
-import { ModelosResponse } from '../models/response.models';
+import { ChartsResponse, ModelosResponse } from '../models/response.models';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -33,5 +33,10 @@ export class ModelsService {
 
   newModel(modelo: EntrenamientoModelo) {
     return this.http.post(this.BASE_URL, modelo);
+  }
+
+  getStats(id: number): Observable<ChartsResponse> {
+    const json = { id: id };
+    return this.http.post<ChartsResponse>(`${this.BASE_URL}/datos`, json);
   }
 }

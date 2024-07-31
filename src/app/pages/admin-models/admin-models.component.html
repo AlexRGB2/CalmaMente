@@ -1,96 +1,124 @@
-<div class="contenedor">
-  <button
-    mat-flat-button
-    class="fs-5 p-4 mb-4 animate__animated animate__flipInX"
-    routerLink="newModel"
-  >
-    <mat-icon>add_circle</mat-icon>
-    <p class="p-2 mt-3">Nuevo Modelo</p>
-  </button>
-  <div class="table-container animate__animated animate__fadeInUp">
-    <table mat-table [dataSource]="modelos" class="mat-elevation-z8">
-      <!-- Tipo Column -->
-      <ng-container matColumnDef="tipo">
-        <th mat-header-cell *matHeaderCellDef>Tipo</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.tipo }}
-        </td>
-      </ng-container>
+<ng-container *ngIf="!isVisibleChart; else charts">
+  <div class="contenedor">
+    <button
+      mat-flat-button
+      class="fs-5 p-4 mb-4 animate__animated animate__flipInX"
+      routerLink="newModel"
+    >
+      <mat-icon>add_circle</mat-icon>
+      <p class="p-2 mt-3">Nuevo Modelo</p>
+    </button>
+    <div class="table-container animate__animated animate__fadeInUp">
+      <table mat-table [dataSource]="modelos" class="mat-elevation-z8">
+        <!-- Tipo Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.tipo }}
+          </td>
+        </ng-container>
 
-      <!-- Nombre Column -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
-      </ng-container>
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
 
-      <!-- Fecha de Creación Column -->
-      <ng-container matColumnDef="fecha de creación">
-        <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.created_at | date : "longDate" }}
-        </td>
-      </ng-container>
+        <!-- Fecha de Creación Column -->
+        <ng-container matColumnDef="fecha de creación">
+          <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.created_at | date : "longDate" }}
+          </td>
+        </ng-container>
 
-      <!-- Parametros Column -->
-      <ng-container matColumnDef="parametros">
-        <th mat-header-cell *matHeaderCellDef>Parametros</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.parametros }}
-        </td>
-      </ng-container>
+        <!-- Parametros Column -->
+        <ng-container matColumnDef="parametros">
+          <th mat-header-cell *matHeaderCellDef>Parametros</th>
+          <td mat-cell *matCellDef="let element" class="parametros">
+            {{ element.parametros }}
+          </td>
+        </ng-container>
 
-      <!-- Accioness Column -->
-      <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let element" class="p-4">
-          <button
-            mat-icon-button
-            matTooltip="Eliminar modelo"
-            matTooltipPosition="above"
-            matTooltipClass="custom-tooltip"
-            class="eliminar mx-2"
-            (click)="deleteModel(element.id, element.nombre, element.principal)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+        <!-- Accioness Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element" class="p-4">
+            <button
+              mat-icon-button
+              matTooltip="Resultados de Entrenamiento"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              class="graficas mx-2"
+              (click)="getStats(element.id)"
+            >
+              <mat-icon>equalizer</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              matTooltip="Eliminar modelo"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              class="eliminar mx-2"
+              (click)="
+                deleteModel(element.id, element.nombre, element.principal)
+              "
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              matTooltip="Probar Modelo"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              class="mx-2"
+            >
+              <mat-icon>assignment</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              matTooltip="Descargar Modelo"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              class="downModelo mx-2"
+            >
+              <mat-icon>download</mat-icon>
+            </button>
 
-          <button
-            mat-icon-button
-            matTooltip="Contestar formulario"
-            matTooltipPosition="above"
-            matTooltipClass="custom-tooltip"
-            class="mx-2"
-          >
-            <mat-icon>assignment</mat-icon>
-          </button>
+            @if(!element.principal){
+            <button
+              mat-icon-button
+              matTooltip="Definir Principal"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              (click)="setDefault(element.id)"
+              class="mx-2"
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+            } @else {
+            <button
+              mat-icon-button
+              matTooltip="Modelo Principal"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"
+              class="principal mx-2"
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+            }
+          </td>
+        </ng-container>
 
-          @if(!element.principal){
-          <button
-            mat-icon-button
-            matTooltip="Definir Default"
-            matTooltipPosition="above"
-            matTooltipClass="custom-tooltip"
-            (click)="setDefault(element.id)"
-            class="mx-2"
-          >
-            <mat-icon>check</mat-icon>
-          </button>
-          } @else {
-          <button
-            mat-icon-button
-            matTooltip="Modelo Default"
-            matTooltipPosition="above"
-            matTooltipClass="custom-tooltip"
-            class="principal mx-2"
-          >
-            <mat-icon>check</mat-icon>
-          </button>
-          }
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #charts>
+  <app-charts-model
+    (isVisibleChart)="onVisibleCharts($event)"
+  ></app-charts-model>
+</ng-template>

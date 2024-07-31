@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModelosNS } from '../../shared/models/modelosia.models';
 import { ModelsService } from '../../shared/services/models.service';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-models',
@@ -18,6 +17,8 @@ export class AdminModelsComponent implements OnInit {
     'parametros',
     'acciones',
   ];
+  isVisibleChart: boolean = false;
+  idModel: number = 0;
 
   constructor(private modelosService: ModelsService) {}
 
@@ -75,5 +76,27 @@ export class AdminModelsComponent implements OnInit {
         Swal.fire({ title: resp.error, icon: 'error' });
       }
     });
+  }
+
+  getStats(id: number) {
+    this.modelosService.getStats(id).subscribe((resp) => {
+      console.log(resp);
+      const item = resp.datos.find((d) => d.tipo === '2.1');
+
+      if (item) {
+        const json = {
+          nombre: item.nombre,
+          valor: item.valor,
+        };
+        localStorage.setItem(item.tipo, JSON.stringify(json));
+        this.isVisibleChart = true;
+      } else {
+        console.log("No se encontró un objeto con el tipo '2.1'");
+      }
+    });
+  }
+
+  onVisibleCharts(isVisible: boolean): void {
+    this.isVisibleChart = isVisible;
   }
 }

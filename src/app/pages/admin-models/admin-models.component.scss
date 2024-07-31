@@ -9,6 +9,12 @@
   overflow: auto;
 }
 
+.parametros {
+  max-width: 20vw;
+  overflow: auto;
+  word-wrap: break-word;
+}
+
 .contenedor button.principal {
   background-color: rgba(0, 255, 255, 0.418);
 }
@@ -17,13 +23,21 @@
   color: #e63946;
 }
 
+.contenedor button.graficas {
+  color: #80ed99;
+}
+
+.contenedor button.downModelo {
+  color: #07bebe;
+}
+
 ::ng-deep .custom-tooltip {
   transform: scale(1.6) !important;
   position: relative !important;
 }
 
 mat-icon {
-  transform: scale(2);
+  transform: scale(1.8);
 }
 
 td,

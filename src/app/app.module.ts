@@ -21,6 +21,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 registerLocaleData(localEs, 'es');
 
@@ -37,10 +38,10 @@ registerLocaleData(localEs, 'es');
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    NgApexchartsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
   providers: [
-    provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([loaderInterceptor])),
     { provide: LOCALE_ID, useValue: 'es' },

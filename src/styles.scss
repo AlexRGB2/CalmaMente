@@ -15,14 +15,3 @@ body {
 .full-width {
   width: 100%;
 }
-
-:root {
-  --primary-color: #6200ee; /* Color primario claro */
-  --card-outline-color: black; /* Color del borde de la tarjeta */
-}
-
-/* Define variables de colores para el tema oscuro */
-body.dark-mode {
-  --primary-color: #bb86fc; /* Color primario oscuro */
-  --card-outline-color: cyan; /* Color del borde de la tarjeta oscuro */
-}
