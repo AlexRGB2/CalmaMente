@@ -2,6 +2,13 @@
   <button mat-flat-button class="fs-4 p-4 mb-5" (click)="setVisibleCharts()">
     <mat-icon>arrow_back</mat-icon> Volver
   </button>
+  <button
+    mat-flat-button
+    class="fs-4 p-4 mb-5 ms-4"
+    (click)="captureChartsAsPDF()"
+  >
+    <mat-icon>picture_as_pdf</mat-icon> Descargar PDF
+  </button>
   <div id="chartDispersionClusters">
     <apx-chart
       [series]="chartOptionsDispersionClusters.series!"
@@ -14,7 +21,6 @@
       [title]="chartOptionsDispersionClusters.title!"
     ></apx-chart>
   </div>
-
   <div id="chartMetodoCodo">
     <apx-chart
       [series]="chartMetodoCodo.series!"

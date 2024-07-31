@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -11,6 +10,9 @@ import {
   ApexLegend,
   ApexPlotOptions,
 } from 'ng-apexcharts';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -36,7 +38,7 @@ export class ChartsModelComponent {
   public chartOptionsTotalClusters!: Partial<ChartOptions>;
   theme: ApexTheme = {};
 
-  constructor() {
+  constructor(private spinnerService: NgxSpinnerService) {
     this.theme.mode = 'light';
     this.loadCharts();
   }
@@ -49,6 +51,71 @@ export class ChartsModelComponent {
     this.dispersionClusters(jsonDispersionClusters);
     this.metodoCodo(jsonMetodoCodo);
     this.totalClusters(jsonTotalClusters);
+  }
+
+  async captureChartsAsPDF() {
+    this.spinnerService.show();
+
+    const charts = [
+      {
+        id: 'chartDispersionClusters',
+        title: 'Gráfica de Dispersión de Clusters',
+      },
+      { id: 'chartMetodoCodo', title: 'Método del Codo' },
+      { id: 'chartTotalClusters', title: 'Total de Clusters' },
+    ];
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    let promises = [];
+
+    for (let i = 0; i < charts.length; i++) {
+      const chartElement = document.getElementById(charts[i].id);
+      if (chartElement) {
+        promises.push(
+          html2canvas(chartElement).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            return { imgData, title: charts[i].title };
+          })
+        );
+      }
+    }
+
+    const capturedImages = await Promise.all(promises);
+
+    let yOffset = 20;
+    const margin = 10;
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const availableHeight = pdf.internal.pageSize.getHeight() - 2 * margin;
+
+    capturedImages.forEach((capturedImage, index) => {
+      const imgProps = pdf.getImageProperties(capturedImage.imgData);
+      const imgWidth = pdfWidth - 2 * margin;
+      const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+      if (yOffset + imgHeight > availableHeight) {
+        pdf.addPage();
+        yOffset = 20;
+      }
+
+      pdf.setFontSize(16);
+      pdf.text(capturedImage.title, margin, yOffset);
+      yOffset += 10;
+      pdf.setLineWidth(0.5);
+      pdf.line(margin, yOffset, pdfWidth - margin, yOffset);
+      yOffset += 5;
+      pdf.addImage(
+        capturedImage.imgData,
+        'PNG',
+        margin,
+        yOffset,
+        imgWidth,
+        imgHeight
+      );
+      yOffset += imgHeight + 10;
+    });
+
+    this.spinnerService.hide();
+    pdf.save('report.pdf');
   }
 
   // Función para crear marcadores discretos dinámicos

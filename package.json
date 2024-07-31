@@ -24,6 +24,8 @@
     "animate.css": "^4.1.1",
     "apexcharts": "^3.51.0",
     "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "ng-apexcharts": "^1.11.0",
     "ngx-spinner": "^17.0.0",
     "rxjs": "~7.8.0",
