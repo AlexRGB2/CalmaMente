@@ -3,6 +3,8 @@ import { ModelosNS } from '../../shared/models/modelosia.models';
 import { ModelsService } from '../../shared/services/models.service';
 import Swal from 'sweetalert2';
 import saveAs from 'file-saver';
+import { Router } from '@angular/router';
+import { ColumnsResponse } from '../../shared/models/response.models';
 
 @Component({
   selector: 'app-admin-models',
@@ -21,7 +23,7 @@ export class AdminModelsComponent implements OnInit {
   isVisibleChart: boolean = false;
   idModel: number = 0;
 
-  constructor(private modelosService: ModelsService) {}
+  constructor(private modelosService: ModelsService, private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerModelos();
@@ -81,7 +83,6 @@ export class AdminModelsComponent implements OnInit {
 
   getStats(id: number) {
     this.modelosService.getStats(id).subscribe((resp) => {
-      console.log(resp);
       const item = resp.datos.find((d) => d.tipo === '2.1');
       const metodoCodo = resp.datos.find((d) => d.tipo === '2.2');
       const totalClusters = resp.datos.find((d) => d.tipo === '2.3');
@@ -146,5 +147,17 @@ export class AdminModelsComponent implements OnInit {
         );
       }
     });
+  }
+
+  getColumnas(id: number) {
+    this.modelosService.getColumnas(id).subscribe(
+      (res: ColumnsResponse) => {
+        localStorage.setItem('columnas', res.columnas.toString());
+        this.router.navigate(['test-model']);
+      },
+      (error) => {
+        console.error('Error al descargar el modelo:', error);
+      }
+    );
   }
 }

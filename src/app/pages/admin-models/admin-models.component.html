@@ -72,6 +72,7 @@
               matTooltipPosition="above"
               matTooltipClass="custom-tooltip"
               class="mx-2"
+              (click)="getColumnas(element.id)"
             >
               <mat-icon>assignment</mat-icon>
             </button>
@@ -81,7 +82,6 @@
               matTooltipPosition="above"
               matTooltipClass="custom-tooltip"
               class="downModelo mx-2"
-              (click)="downModel(element.id, element.nombre)"
             >
               <mat-icon>download</mat-icon>
             </button>

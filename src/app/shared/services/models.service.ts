@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EntrenamientoModelo, ModelosNS } from '../models/modelosia.models';
 import { environment } from '../../../environments/environment.development';
-import { ChartsResponse, ModelosResponse } from '../models/response.models';
+import {
+  ChartsResponse,
+  ColumnsResponse,
+  ModelosResponse,
+} from '../models/response.models';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -46,5 +50,10 @@ export class ModelsService {
   getStats(id: number): Observable<ChartsResponse> {
     const json = { id: id };
     return this.http.post<ChartsResponse>(`${this.BASE_URL}/datos`, json);
+  }
+
+  getColumnas(id: number) {
+    const json = { id: id };
+    return this.http.post<ColumnsResponse>(`${this.BASE_URL}/columnas`, json);
   }
 }

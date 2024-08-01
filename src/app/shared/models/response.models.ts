@@ -20,6 +20,11 @@ export interface ChartsResponse {
   mensaje: string;
 }
 
+export interface ColumnsResponse {
+  mensaje: string;
+  columnas: string[];
+}
+
 interface DatosResponse {
   created_at: string;
   descripcion: null;
