@@ -182,8 +182,6 @@ export class AdminModelsComponent implements OnInit {
         ? `N Componentes: ${param.n_components}`
         : `N Clusters: ${param.n_clusters}`;
 
-    console.log(mainParam);
-
     return `${mainParam}, Random State: ${param.random_state}, <br>N Init: ${param.n_init}, Max Iter: ${param.max_iter}`;
   }
 }
