@@ -223,7 +223,6 @@ export class ChartsModelComponent {
 
   metodoCodo(json: any): void {
     const seriesData = json.valor;
-    console.log(seriesData);
 
     this.chartMetodoCodo = {
       series: [

@@ -1,5 +1,31 @@
-.contenedor {
-  padding: 5vh;
+.container {
+  min-height: 85vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+}
+
+.questions-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.question-item {
+  flex: 1 1 calc(50% - 1rem); /* Toma 50% del contenedor menos el gap */
+  min-width: calc(50% - 1rem);
+}
+
+mat-form-field.full-width {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+button {
+  max-width: 8rem;
 }

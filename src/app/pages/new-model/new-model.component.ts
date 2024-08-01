@@ -81,14 +81,19 @@ export class NewModelComponent {
       };
     }
 
-    this.modelsService.newModel(json).subscribe((resp: any) => {
-      if (resp.mensaje) {
-        Swal.fire({ title: resp.mensaje, icon: 'success' });
-        this.dataset = undefined;
-        this.nombreAlgoritmo = '';
-      } else {
-        Swal.fire({ title: resp.error, icon: 'error' });
+    this.modelsService.newModel(json).subscribe(
+      (resp: any) => {
+        if (resp.mensaje) {
+          Swal.fire({ title: resp.mensaje, icon: 'success' });
+          this.dataset = undefined;
+          this.nombreAlgoritmo = '';
+        } else {
+          Swal.fire({ title: resp.error, icon: 'error' });
+        }
+      },
+      (error) => {
+        Swal.fire({ title: 'Error', text: error.error, icon: 'error' });
       }
-    });
+    );
   }
 }
