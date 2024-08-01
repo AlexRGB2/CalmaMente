@@ -42,14 +42,23 @@ export class AdminModelsComponent implements OnInit {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.modelosService.deleteModel(id).subscribe((resp: any) => {
-            if (resp.mensaje) {
-              Swal.fire({ title: resp.mensaje, icon: 'success' });
-              this.obtenerModelos();
-            } else {
-              Swal.fire({ title: resp.error, icon: 'error' });
+          this.modelosService.deleteModel(id).subscribe(
+            (resp: any) => {
+              if (resp.mensaje) {
+                Swal.fire({ title: resp.mensaje, icon: 'success' });
+                this.obtenerModelos();
+              } else {
+                Swal.fire({ title: resp.error, icon: 'error' });
+              }
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error',
+                text: error.error.error,
+                icon: 'error',
+              });
             }
-          });
+          );
         }
       });
     } else {
@@ -71,14 +80,19 @@ export class AdminModelsComponent implements OnInit {
   }
 
   setDefault(id: number) {
-    this.modelosService.setDefaultModel(id).subscribe((resp: any) => {
-      if (resp.mensaje) {
-        Swal.fire({ title: resp.mensaje, icon: 'success' });
-        this.obtenerModelos();
-      } else {
-        Swal.fire({ title: resp.error, icon: 'error' });
+    this.modelosService.setDefaultModel(id).subscribe(
+      (resp: any) => {
+        if (resp.mensaje) {
+          Swal.fire({ title: resp.mensaje, icon: 'success' });
+          this.obtenerModelos();
+        } else {
+          Swal.fire({ title: resp.error, icon: 'error' });
+        }
+      },
+      (error) => {
+        Swal.fire({ title: 'Error', text: error.error.error, icon: 'error' });
       }
-    });
+    );
   }
 
   getStats(id: number) {

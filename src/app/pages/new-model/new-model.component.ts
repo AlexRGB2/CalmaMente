@@ -92,7 +92,7 @@ export class NewModelComponent {
         }
       },
       (error) => {
-        Swal.fire({ title: 'Error', text: error.error, icon: 'error' });
+        Swal.fire({ title: 'Error', text: error.error.error, icon: 'error' });
       }
     );
   }
