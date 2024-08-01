@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModelosNS } from '../../shared/models/modelosia.models';
+import { ModelosNS, Parametros } from '../../shared/models/modelosia.models';
 import { ModelsService } from '../../shared/services/models.service';
 import Swal from 'sweetalert2';
 import saveAs from 'file-saver';
@@ -173,5 +173,17 @@ export class AdminModelsComponent implements OnInit {
         console.error('Error al descargar el modelo:', error);
       }
     );
+  }
+
+  getFormattedConfig(parametro: Parametros): string {
+    const param: Parametros = JSON.parse(parametro.toString());
+    const mainParam =
+      param.n_components !== undefined
+        ? `N Componentes: ${param.n_components}`
+        : `N Clusters: ${param.n_clusters}`;
+
+    console.log(mainParam);
+
+    return `${mainParam}, Random State: ${param.random_state}, <br>N Init: ${param.n_init}, Max Iter: ${param.max_iter}`;
   }
 }

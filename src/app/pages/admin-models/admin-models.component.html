@@ -35,9 +35,12 @@
         <!-- Parametros Column -->
         <ng-container matColumnDef="parametros">
           <th mat-header-cell *matHeaderCellDef>Parametros</th>
-          <td mat-cell *matCellDef="let element" class="parametros">
-            {{ element.parametros }}
-          </td>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="parametros"
+            [innerHTML]="getFormattedConfig(element.parametros)"
+          ></td>
         </ng-container>
 
         <!-- Accioness Column -->
